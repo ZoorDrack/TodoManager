@@ -1,0 +1,14 @@
+{
+	"name":"TestTask",
+	"description": "",
+	"version": "1.0.0",
+	"main": "server.js",
+	"dependencies": {
+		"mongodb": "3.0.1",
+		"express": "4.15.4",
+    	"ejs": "2.5.7",
+    	"body-parser":"^1.15.2"
+	},
+	"author": "Stephen Chausenko",
+	"license": "ISC"
+}
