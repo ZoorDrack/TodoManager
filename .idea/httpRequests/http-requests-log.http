@@ -1,0 +1,26 @@
+POST http://localhost:8080/tasks?title=Title&prior=Hight&state=New&deadLine=05.02.2018
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/x-www-form-urlencoded
+
+<> 2018-02-04T103336.200.json
+
+###
+
+POST http://localhost:8080/tasks?title=Title&prior=Hight&state=New&deadLine=05.02.2018
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/x-www-form-urlencoded
+
+<> 2018-02-04T092922.500.html
+
+###
+
+POST http://localhost:8080/tasks?title=Some title&prior=Hight&state=New&deadLine=05.02.2018
+Accept: */*
+Cache-Control: no-cache
+
+<> 2018-02-04T091918.415.html
+
+###
+

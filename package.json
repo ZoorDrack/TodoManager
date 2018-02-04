@@ -1,5 +1,5 @@
 {
-	"name":"TestTask",
+	"name":"TodoManager",
 	"description": "",
 	"version": "1.0.0",
 	"main": "server.js",
@@ -7,7 +7,10 @@
 		"mongodb": "3.0.1",
 		"express": "4.15.4",
     	"ejs": "2.5.7",
-    	"body-parser":"^1.15.2"
+    	"body-parser":"^1.15.2",
+		"react": "^15.6.1",
+		"react-dom": "15.6.1",
+		"bootstrap": "next"
 	},
 	"author": "Stephen Chausenko",
 	"license": "ISC"
