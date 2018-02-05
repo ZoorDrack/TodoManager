@@ -1,7 +1,6 @@
 var ObjectID = require('mongodb').ObjectID;
 
 module.exports = function(app,db) {
-	console.log(db);
 	app.post('/tasks', (req,res) => {
 		const todo = {title: req.body.title, prior: req.body.prior, state: req.body.state, deadLine: req.body.deadLine};
 		db.collection('tasks').insert(todo, (err,result) => {

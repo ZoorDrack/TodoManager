@@ -1,4 +1,4 @@
 module.exports = {
-	url: "mongodb://127.0.0.1:27017",
+	url: "mongodb://admin:admin@ds012058.mlab.com:12058/todolist",
 	name: "todolist"
 }
