@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Button, Header, Form, Icon, Message, Modal, Dropdown } from 'semantic-ui-react'
+import { Button, Form, Icon, Modal, Dropdown } from 'semantic-ui-react'
 
 export default class NewTask extends Component {
     constructor(props) {
@@ -16,9 +16,7 @@ export default class NewTask extends Component {
 
     handleOpen = () => this.setState({ modalOpen: true })
 
-    handleClose = () => {
-        this.setState({ modalOpen: false })
-    }
+    handleClose = () => this.setState({ modalOpen: false })
 
     handleChange = (e, { name,value }) => this.setState({ [name]: value })
 
@@ -47,20 +45,7 @@ export default class NewTask extends Component {
 
     render() {
         const {title,prior,state,deadLine} = this.state
-        const priority = [
-            {
-                text: 'Low',
-                value: 'Low'
-            },
-            {
-                text: 'Middle',
-                value: 'Middle'
-            },
-            {
-                text: 'Hight',
-                value: 'Hight'
-            }
-        ]
+        const priority = this.props.priority
 
         return (
             <Modal

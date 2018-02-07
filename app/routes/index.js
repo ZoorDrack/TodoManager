@@ -7,7 +7,7 @@ module.exports = function(app,db) {
 			if (err) {
 				res.send({'error': 'Error'});
 			} else {
-				console.log(req.body);
+                console.log(req.body);
 				res.send(result.ops[0]);
 			}
 		});
@@ -22,6 +22,7 @@ module.exports = function(app,db) {
 		});
 	});
 	app.delete('/tasks/:id', (req,res) => {
+        console.log(req.body);
 		const id = req.params.id;
 		const criterion = { '_id': new ObjectID(id) };
 		db.collection('tasks').remove(criterion, (err,item) => {

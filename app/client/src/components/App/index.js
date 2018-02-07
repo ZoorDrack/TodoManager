@@ -5,6 +5,7 @@ import TodoList from '../TodoList/index'
 import logo from './logo.svg'
 import 'bootstrap/dist/css/bootstrap.css'
 import './style.css';
+import priority from '../priority'
 import { Header } from 'semantic-ui-react'
 
 class App extends Component {
@@ -35,10 +36,17 @@ class App extends Component {
                         color='grey'
                         content='Todo Manager'
                     />
-                    <NewTask todoListUpdate={this.todoListUpdate.bind(this)} />
+                    <NewTask
+                        todoListUpdate={this.todoListUpdate.bind(this)}
+                        priority={priority}
+                    />
                 </div>
                 <div style={{padding: '20px'}}>
-                    <TodoList tasks={this.state.tasks}/>
+                    <TodoList
+                        tasks={this.state.tasks}
+                        todoListUpdate={this.todoListUpdate.bind(this)}
+                        priority={priority}
+                    />
                 </div>
             </div>
         );

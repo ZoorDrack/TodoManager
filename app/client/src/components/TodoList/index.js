@@ -1,26 +1,23 @@
 import React, {Component} from 'react'
-import { Table } from 'semantic-ui-react'
+import TodoItemList from '../TodoListItem/index'
+import EditTask from '../EditTask/index'
+import { Table, Input, Dropdown } from 'semantic-ui-react'
+import priority from "../priority";
 
 export default class TodoList extends Component {
-    checkDeadLine = (deadLineISO) => {
-        var curDate = new Date();
-        var deadLine = new Date(deadLineISO)
-
-        if (curDate >= deadLine) {
-            return true
-        } else {
-            return false
-        }
+    constructor(props) {
+        super(props)
     }
 
     render() {
         const todoElements = this.props.tasks.map((task,index) =>
-            <Table.Row error={this.checkDeadLine(task.deadLine)}>
-                <Table.Cell>{task.state}</Table.Cell>
-                <Table.Cell>{task.title}</Table.Cell>
-                <Table.Cell>{task.deadLine}</Table.Cell>
-                <Table.Cell>{task.prior}</Table.Cell>
-            </Table.Row>
+            <EditTask
+                key={task._id}
+                task={task}
+                todoListUpdate={this.props.todoListUpdate.bind(this)}
+                priority={this.props.priority}
+            />
+
         )
 
         return (
