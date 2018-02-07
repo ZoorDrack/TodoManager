@@ -7,18 +7,17 @@ module.exports = function(app,db) {
 			if (err) {
 				res.send({'error': 'Error'});
 			} else {
+				console.log(req.body);
 				res.send(result.ops[0]);
 			}
 		});
 	});
-	app.get('/tasks/:id', (req,res) => {
-		const id = req.params.id;
-		const criterion = { '_id': new ObjectID(id) };
-		db.collection('tasks').findOne(criterion, (err,item) => {
+	app.get('/tasks', (req,res) => {
+		db.collection('tasks').find({}).toArray( (err,items) => {
 			if (err) {
 				res.send({'error':'Error'});
 			} else {
-				res.send(item);
+				res.send(items);
 			}
 		});
 	});
