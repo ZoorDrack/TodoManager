@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
-import 'semantic-ui-css/semantic.css'
-import NewTask from '../NewTask/index'
-import TodoList from '../TodoList/index'
-import logo from './logo.svg'
-import 'bootstrap/dist/css/bootstrap.css'
+import 'semantic-ui-css/semantic.min.css'
+import NewTask from '../NewTask'
+import TodoList from '../TodoList'
 import './style.css';
 import priority from '../priority'
 import { Header } from 'semantic-ui-react'
@@ -39,6 +37,7 @@ class App extends Component {
                     <NewTask
                         todoListUpdate={this.todoListUpdate.bind(this)}
                         priority={priority}
+                        floating={''}
                     />
                 </div>
                 <div style={{padding: '20px'}}>

@@ -1,7 +1,10 @@
 import React, {Component} from 'react'
-import { Button, Form, Icon, Modal, Dropdown } from 'semantic-ui-react'
-import TodoListItem from '../TodoListItem'
-import statusList from '../statusList'
+import { Button, Form, Modal } from 'semantic-ui-react'
+import TodoListItem from './TodoListItem'
+import DeleteModal from './DeleteModal'
+import ValidationMessage from './ValidationMessage'
+import statusList from './statusList'
+import inputValidation from "./inputValidation";
 
 export default class EditTask extends Component {
     constructor(props) {
@@ -25,6 +28,28 @@ export default class EditTask extends Component {
 
     handleChange = (e, { name,value }) => this.setState({ [name]: value })
 
+    validationCheckMessage = () => {
+        const check = new inputValidation(this.state)
+        const messages = []
+
+        if (!check.titleValidation()) { messages.push("It's too long or empty title. Maximum size of title is 50 symbols") }
+        if (!check.dateValidation()) { messages.push("There is incorrect deadline date. It must be not before today") }
+        if (!check.stateValidation()) { messages.push("Incorrect state") }
+        if (!check.priorValidation()) { messages.push("Incorrect priority") }
+
+        return messages
+    }
+
+    validationCheck = () => {
+        const check = new inputValidation(this.state)
+        if (!check.totalCheck()) {
+            this.msg.setState({hidden: false, messages: this.validationCheckMessage()})
+        } else {
+            this.msg.setState({hidden: true, messages: []})
+            this.sendTask()
+        }
+    }
+
     checkState = (state,button) => {
         return state === button
     }
@@ -39,6 +64,20 @@ export default class EditTask extends Component {
                 "&state="+this.state.state+
                 "&deadLine="+this.state.deadLine
         })
+            .then(res => {
+                this.props.todoListUpdate();
+                res.json()
+            })
+            .then(tasks => console.log(tasks));
+
+        this.handleClose();
+    }
+
+    deleteTask = () => {
+        fetch('/tasks/'+this.props.task._id, {
+            method: 'DELETE',
+            headers: {'Content-Type':'application/x-www-form-urlencoded'}
+        })
             .then(res => res.json())
             .then(tasks => console.log(tasks));
 
@@ -47,11 +86,12 @@ export default class EditTask extends Component {
     }
 
     render() {
-        const {title,prior,state,deadLine} = this.state
+        const {title,prior,deadLine} = this.state
         const priority = this.props.priority
 
         const stateElement = statusList.map((state,index) =>
             <Button
+                key={index}
                 active={this.checkState(this.state.state,state.text)}
                 placeholder='Status'
                 type='text'
@@ -72,7 +112,6 @@ export default class EditTask extends Component {
                         handleOpen={this.handleOpen.bind(this)}
                     />
                 }
-                style={'margin: 10em 0em 10em -44%;'}
                 open={this.state.modalOpen}
                 onClose={this.handleClose}
                 size='small'
@@ -117,9 +156,11 @@ export default class EditTask extends Component {
                             {stateElement}
                         </Button.Group>
                     </Form>
+                    <ValidationMessage onRef={ref => (this.msg = ref)} />
                 </Modal.Content>
                 <Modal.Actions>
-                    <Button onClick={this.sendTask} color='green'>Update task</Button>
+                    <Button onClick={this.validationCheck} color='green'>Update task</Button>
+                    <DeleteModal deleteTask={this.deleteTask.bind(this)} />
                 </Modal.Actions>
             </Modal>
         )

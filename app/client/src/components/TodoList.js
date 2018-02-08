@@ -1,14 +1,8 @@
 import React, {Component} from 'react'
-import TodoItemList from '../TodoListItem/index'
-import EditTask from '../EditTask/index'
-import { Table, Input, Dropdown } from 'semantic-ui-react'
-import priority from "../priority";
+import EditTask from './EditTask'
+import { Table } from 'semantic-ui-react'
 
 export default class TodoList extends Component {
-    constructor(props) {
-        super(props)
-    }
-
     render() {
         const todoElements = this.props.tasks.map((task,index) =>
             <EditTask
@@ -23,8 +17,9 @@ export default class TodoList extends Component {
         return (
             <Table
                 celled
-                basic
                 selectable
+                color='blue'
+                sortable
             >
                 <Table.Header>
                     <Table.Row>

@@ -1,11 +1,7 @@
 import React, {Component} from 'react'
-import { Table, Input, Dropdown } from 'semantic-ui-react'
+import { Table } from 'semantic-ui-react'
 
 export default class TodoListItem extends Component {
-    constructor(props) {
-        super(props)
-    }
-
     checkDeadLine = (deadLineISO) => {
         const curDate = new Date();
         const deadLine = new Date(deadLineISO)
