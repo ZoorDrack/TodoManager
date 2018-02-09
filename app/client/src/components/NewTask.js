@@ -17,6 +17,13 @@ export default class NewTask extends Component {
         }
     }
 
+    componentDidMount() {
+        this.props.onRef(this)
+    }
+    componentWillUnmount() {
+        this.props.onRef(undefined)
+    }
+
     handleOpen = () => this.setState({ modalOpen: true })
 
     handleClose = () => this.setState({ modalOpen: false })
@@ -53,7 +60,8 @@ export default class NewTask extends Component {
                 "title="+this.state.title+
                 "&prior="+this.state.prior+
                 "&state="+this.state.state+
-                "&deadLine="+this.state.deadLine
+                "&deadLine="+this.state.deadLine+
+                "&index="+this.state.index
         })
             .then(res => {
                 this.props.todoListUpdate();
@@ -65,7 +73,8 @@ export default class NewTask extends Component {
             title: '',
             prior: '',
             state: 'New',
-            deadLine: new dateConverter().todayISO()
+            deadLine: new dateConverter().todayISO(),
+            index: ++this.state.index
         })
         this.handleClose();
     }

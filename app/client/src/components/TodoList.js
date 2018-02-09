@@ -23,10 +23,11 @@ export default class TodoList extends Component {
             >
                 <Table.Header>
                     <Table.Row>
-                        <Table.HeaderCell>Status</Table.HeaderCell>
-                        <Table.HeaderCell>Title</Table.HeaderCell>
-                        <Table.HeaderCell>Date</Table.HeaderCell>
-                        <Table.HeaderCell>Priority</Table.HeaderCell>
+                        <Table.HeaderCell width={2}>Status</Table.HeaderCell>
+                        <Table.HeaderCell width={8}>Title</Table.HeaderCell>
+                        <Table.HeaderCell width={3}>Date</Table.HeaderCell>
+                        <Table.HeaderCell width={3}>Priority</Table.HeaderCell>
+                        <Table.HeaderCell width={2}>Position</Table.HeaderCell>
                     </Table.Row>
                 </Table.Header>
 

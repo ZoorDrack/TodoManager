@@ -20,7 +20,7 @@ export default class ValidationMessage extends Component {
 
     render() {
         const messageStrings = this.state.messages.map((message,index) =>
-            <Message.Item>{message}</Message.Item>
+            <Message.Item key={index}>{message}</Message.Item>
         )
 
         return (

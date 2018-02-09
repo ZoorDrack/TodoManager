@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Table } from 'semantic-ui-react'
+import { Table, Icon } from 'semantic-ui-react'
 
 export default class TodoListItem extends Component {
     checkDeadLine = (deadLineISO) => {
@@ -12,6 +12,28 @@ export default class TodoListItem extends Component {
     checkResolve = () => {return (this.props.task.state === 'Resolved')}
 
     checkClosed = () => {return (this.props.task.state === 'Closed')}
+
+    moveItem = (direction) => {
+        const index = (direction === 'up') ? (Number(this.props.task.index)-1.1) : (Number(this.props.task.index)+1.1)
+        fetch('/tasks/'+this.props.task._id, {
+            method: 'PATCH',
+            headers: {'Content-Type':'application/x-www-form-urlencoded'},
+            body:
+                "index="+index
+        })
+            .then(res => {
+                this.props.todoListUpdate();
+                res.json()
+            })
+    }
+
+    upItem = () => {
+        this.moveItem('up');
+    }
+
+    downItem = () => {
+        this.moveItem('down');
+    }
 
     render() {
         return (
@@ -39,6 +61,10 @@ export default class TodoListItem extends Component {
                     <a onClick = {this.props.handleOpen}>
                         {this.props.task.prior}
                     </a>
+                </Table.Cell>
+                <Table.Cell  textAlign='center'>
+                    <Icon name='up chevron' style = {{cursor: 'pointer'}} onClick = {this.upItem} />
+                    <Icon name='down chevron' style = {{cursor: 'pointer'}} onClick = {this.downItem} />
                 </Table.Cell>
             </Table.Row>
         )

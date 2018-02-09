@@ -20,7 +20,6 @@ export default class inputValidation {
             check = new Date(this.props.deadLine)
         today.setHours(0,0,0,0)
 
-        console.log(today+' --- '+check)
         return (today <= check)
     }
 

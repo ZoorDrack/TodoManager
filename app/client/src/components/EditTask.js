@@ -15,14 +15,12 @@ export default class EditTask extends Component {
             title: this.props.task.title,
             prior: this.props.task.prior,
             state: this.props.task.state,
-            deadLine: this.props.task.deadLine
+            deadLine: this.props.task.deadLine,
+            index: this.props.task.index
         }
     }
 
-    handleOpen = () => {
-        this.setState({ modalOpen: true })
-        console.log(this.props.task)
-    }
+    handleOpen = () => this.setState({ modalOpen: true })
 
     handleClose = () => this.setState({ modalOpen: false })
 
@@ -62,7 +60,8 @@ export default class EditTask extends Component {
                 "title="+this.state.title+
                 "&prior="+this.state.prior+
                 "&state="+this.state.state+
-                "&deadLine="+this.state.deadLine
+                "&deadLine="+this.state.deadLine+
+                "&index="+this.state.index
         })
             .then(res => {
                 this.props.todoListUpdate();
@@ -110,6 +109,7 @@ export default class EditTask extends Component {
                         task={this.props.task}
                         priority={this.props.priority}
                         handleOpen={this.handleOpen.bind(this)}
+                        todoListUpdate={this.props.todoListUpdate.bind(this)}
                     />
                 }
                 open={this.state.modalOpen}

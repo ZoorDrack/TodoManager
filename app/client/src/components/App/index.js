@@ -11,36 +11,54 @@ class App extends Component {
         tasks: []
     }
 
-    componentDidMount() {
+    componentDidMount = () => {
         this.todoListUpdate();
     }
 
-    todoListUpdate() {
+    todoListUpdate = () => {
         fetch('/tasks', {
             method: "GET"
         })
             .then(res => res.json())
-            .then(tasks => this.setState({ tasks }));
+            .then(tasks => {
+                this.setState({ tasks })
+                this.newTaskIndexBind(tasks)
+            })
+
+    }
+
+    newTaskIndexBind = (list) => {
+        const index = (list !== undefined) ? list[list.length-1].index + 1 : 0
+        this.newTask.setState({index: index})
     }
 
     render() {
+        const style = {
+            padding: '20px',
+            maxWidth: '1000px',
+            margin: 'auto'
+        }
         return (
             <div>
                 <div className='App-header'>
-                    <Header
-                        as='h2'
-                        floated='left'
-                        inverted
-                        color='grey'
-                        content='Todo Manager'
-                    />
-                    <NewTask
-                        todoListUpdate={this.todoListUpdate.bind(this)}
-                        priority={priority}
-                        floating={''}
-                    />
+                    <div style={{maxWidth: '900px',margin: 'auto'}}>
+                        <Header
+                            as='h2'
+                            floated='left'
+                            inverted
+                            color='grey'
+                            content='Todo Manager'
+                        />
+                        <NewTask
+                            index={this.state.tasks}
+                            todoListUpdate={this.todoListUpdate.bind(this)}
+                            onRef={ref => (this.newTask = ref)}
+                            priority={priority}
+                            floating={''}
+                        />
+                    </div>
                 </div>
-                <div style={{padding: '20px'}}>
+                <div style={style}>
                     <TodoList
                         tasks={this.state.tasks}
                         todoListUpdate={this.todoListUpdate.bind(this)}
