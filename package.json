@@ -9,8 +9,7 @@
     	"ejs": "2.5.7",
     	"body-parser":"^1.15.2",
 		"react": "^15.6.1",
-		"react-dom": "15.6.1",
-		"bootstrap": "next"
+		"react-dom": "15.6.1"
 	},
 	"author": "Stephen Chausenko",
 	"license": "ISC"
